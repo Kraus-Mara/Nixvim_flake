@@ -51,11 +51,4 @@
       enable = true;
     };
   };
-
-  # =====================================================================
-  # SUPPRIMÉ : tout l'extraConfigLua superflu
-  # - Highlights : gruvbox + noice se configurent automatiquement  
-  # - Intégrations telescope : automatiques
-  # - Commandes personnalisées : les commandes natives suffisent
-  # =====================================================================
 }
