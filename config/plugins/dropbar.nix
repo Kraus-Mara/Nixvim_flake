@@ -1,14 +1,9 @@
 {
-  # =====================================================================
-  # DROPBAR.NVIM - Configuration minimaliste (le plugin est "zero config")
-  # =====================================================================
-
   plugins.dropbar = {
     enable = true;
 
     settings = {
       bar = {
-        # Désactiver plus conservativement pour éviter conflits avec snacks
         enable = {
           __raw = ''
             function(buf, win, _)
@@ -39,30 +34,22 @@
         };
       };
 
-      # Juste les icônes UI pour cohérence avec le thème gruvbox
       icons = {
         ui = {
           bar = {
-            separator = " › "; # Plus lisible que le défaut
+            separator = " › ";
           };
         };
       };
 
-      # Bordures arrondies pour cohérence avec le reste de la config
       menu = {
         win_configs = {
           border = "rounded";
         };
-
-        # Réduire la hauteur max pour éviter les conflits
         max_height = 15;
       };
     };
   };
-
-  # =====================================================================
-  # TELESCOPE FZF NATIVE - Optionnel pour fuzzy search amélioré dans dropbar
-  # =====================================================================
   plugins.telescope = {
     extensions = {
       fzf-native = {

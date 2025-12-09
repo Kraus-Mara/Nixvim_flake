@@ -1,13 +1,6 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 {
-  # =====================================================================
-  # CONFIGURATION GIT + METEOR - Conventional Commits
-  # =====================================================================
-
   plugins = {
-    # =================================================================
-    # GITSIGNS - Juste les icônes personnalisées (style LazyVim)
-    # =================================================================
     gitsigns = {
       enable = true;
       settings = {
@@ -29,9 +22,6 @@
       };
     };
 
-    # =================================================================
-    # AUTRES PLUGINS - Configuration minimale (défauts excellents)
-    # =================================================================
     fugitive.enable = true;
     diffview.enable = true;
     git-conflict.enable = true;
@@ -41,25 +31,20 @@
     { __unkeyed-1 = "<leader>g"; group = "Git"; }
   ];
 
-  # =====================================================================
-  # PACKAGES ESSENTIELS + METEOR
-  # =====================================================================
   extraPackages = with pkgs; [
     git
     lazygit
-    meteor-git  # ← CLI pour conventional commits
+    meteor-git
   ];
 
   keymaps = [
-    # ===== GIT GROUP - <leader>g =====
     {
       mode = "n";
       key = "<leader>gg";
       action = "<cmd>lua Snacks.lazygit()<cr>";
       options.desc = "Lazygit";
     }
-    
-    # METEOR COMMITS - Remplace git commit classique
+
     {
       mode = "n";
       key = "<leader>gc";
@@ -68,9 +53,8 @@
           require("snacks").terminal.open("meteor", {
             title = "Meteor - Conventional Commits",
             size = { width = 0.8, height = 0.6 },
-            -- Terminal interactif qui se ferme après commit
             on_exit = function()
-              require("snacks").notify("Commit created! 🚀", { 
+              require("snacks").notify("Commit", { 
                 title = "Meteor",
                 icon = "󰊢"
               })
@@ -78,17 +62,16 @@
           })
         end
       '';
-      options.desc = "Commit (Meteor)";
+      options.desc = "Commit by Meteor";
     }
-    
-    # Git commit classique en backup
+
     {
       mode = "n";
       key = "<leader>gC";
       action = "<cmd>Git commit<cr>";
       options.desc = "Git Commit (Classic)";
     }
-    
+
     {
       mode = "n";
       key = "<leader>gp";
@@ -114,7 +97,6 @@
       options.desc = "Git Status";
     }
 
-    # Git hunks (gitsigns intégré automatiquement par Nixvim)
     {
       mode = [
         "n"
@@ -134,9 +116,6 @@
       options.desc = "Reset Hunk";
     }
 
-    # =====================================================================
-    # NAVIGATION - g, [, ], z prefixes - Nixvim configure automatiquement
-    # =====================================================================
     {
       mode = "n";
       key = "]h";
@@ -167,11 +146,7 @@
     }
   ];
 
-  # =====================================================================
-  # CONFIGURATION SUPPLÉMENTAIRE - Meteor + Git
-  # =====================================================================
   extraConfigLua = ''
-    -- Diffview : configuration ultra-simple (défauts excellents)
     require("diffview").setup({
       enhanced_diff_hl = false,
       view = {
@@ -180,10 +155,8 @@
       },
     })
     
-    -- Git-conflict : défauts parfaits, juste activer
     require("git-conflict").setup()
     
-    -- Commandes utiles simplifiées
     vim.api.nvim_create_user_command("GitStageFile", function()
       require("gitsigns").stage_buffer()
       require("snacks").notify("File staged", { title = "Git" })
@@ -194,7 +167,6 @@
       require("snacks").notify("File unstaged", { title = "Git" })
     end, { desc = "Unstage current file" })
     
-    -- METEOR : Commandes utiles pour conventional commits
     vim.api.nvim_create_user_command("MeteorCommit", function()
       require("snacks").terminal.open("meteor", {
         title = "Meteor - Conventional Commits",
@@ -202,7 +174,6 @@
       })
     end, { desc = "Open Meteor for conventional commits" })
     
-    -- Fonction pour créer .meteor.json dans le projet
     vim.api.nvim_create_user_command("MeteorConfig", function()
       local config = {
         boards = {

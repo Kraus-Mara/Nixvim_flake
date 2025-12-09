@@ -1,28 +1,20 @@
 {
-  # =====================================================================
-  # LUALINE - Configuration simplifiée (nixvim gère les intégrations)
-  # =====================================================================
-
   plugins.lualine = {
     enable = true;
 
     settings = {
       options = {
-        # SEULEMENT les valeurs non-défaut
-        globalstatus = true; # Différent du défaut (false)
+        globalstatus = true;
         disabled_filetypes = {
           statusline = [ "dashboard" "alpha" "ministarter" "snacks_dashboard" ];
         };
-        # SUPPRIMÉ : theme = "auto" (défaut)
       };
 
       sections = {
-        # Sections simplifiées - nixvim gère les intégrations automatiquement
         lualine_a = [ "mode" ];
         lualine_b = [ "branch" ];
-        
+
         lualine_c = [
-          # Root directory simplifié
           {
             __unkeyed-1.__raw = ''
               function()
@@ -37,7 +29,6 @@
             color = { fg = "#83a598"; };
           }
 
-          # Diagnostics avec icônes personnalisées
           {
             __unkeyed-1 = "diagnostics";
             symbols = {
@@ -48,21 +39,19 @@
             };
           }
 
-          # Filetype icon + filename
-          { 
-            __unkeyed-1 = "filetype"; 
-            icon_only = true; 
-            separator = ""; 
-            padding = { left = 1; right = 0; }; 
+          {
+            __unkeyed-1 = "filetype";
+            icon_only = true;
+            separator = "";
+            padding = { left = 1; right = 0; };
           }
-          { 
-            __unkeyed-1 = "filename"; 
-            padding = { left = 0; right = 1; }; 
+          {
+            __unkeyed-1 = "filename";
+            padding = { left = 0; right = 1; };
           }
         ];
 
         lualine_x = [
-          # Snacks profiler (si disponible)
           {
             __unkeyed-1.__raw = ''
               function() 
@@ -87,7 +76,6 @@
             '';
           }
 
-          # Git diff
           {
             __unkeyed-1 = "diff";
             symbols = {
@@ -112,16 +100,7 @@
         ];
       };
 
-      # Extensions essentielles seulement
       extensions = [ "lazy" ];
     };
   };
-
-  # =====================================================================
-  # SUPPRIMÉ : extraConfigLua complexe et superflu
-  # - Nixvim gère automatiquement laststatus et globalstatus
-  # - Gestion de performance automatique
-  # - Pas besoin de "require madness" workaround
-  # - Intégrations trouble/telescope automatiques si plugins activés
-  # =====================================================================
 }

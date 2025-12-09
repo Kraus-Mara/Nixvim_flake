@@ -2,7 +2,6 @@
   plugins = {
     snacks = {
       enable = true;
-
       settings = {
         bigfile.enabled = true;
         quickfile.enabled = true;
@@ -12,23 +11,19 @@
         terminal.enabled = true;
         bufdelete.enabled = true;
         explorer.enabled = true;
-
         indent.enabled = true;
         scope.enabled = true;
         statuscolumn.enabled = true;
         input.enabled = true;
         scroll.enabled = true;
-
         git.enabled = true;
         gitbrowse.enabled = true;
         lazygit.enabled = true;
         rename.enabled = true;
         toggle.enabled = true;
-
         scratch.enabled = true;
         zen.enabled = true;
         profiler.enabled = true;
-
         animate.enabled = true;
         dim.enabled = true;
         words.enabled = true;
@@ -37,41 +32,40 @@
           preset = {
             header = [
               "
-                                                                
- ██████   █████                   █████   █████  ███                  
-░░██████ ░░███                   ░░███   ░░███  ░░░                   
- ░███░███ ░███   ██████   ██████  ░███    ░███  ████  █████████████   
- ░███░░███░███  ███░░███ ███░░███ ░███    ░███ ░░███ ░░███░░███░░███  
- ░███ ░░██████ ░███████ ░███ ░███ ░░███   ███   ░███  ░███ ░███ ░███  
- ░███  ░░█████ ░███░░░  ░███ ░███  ░░░█████░    ░███  ░███ ░███ ░███  
- █████  ░░█████░░██████ ░░██████     ░░███      █████ █████░███ █████ 
-░░░░░    ░░░░░  ░░░░░░   ░░░░░░       ░░░      ░░░░░ ░░░░░ ░░░ ░░░░░  
-                                                                   
+ ██████   █████  ███                        █████   █████  ███                 
+▒▒██████ ▒▒███  ▒▒▒                        ▒▒███   ▒▒███  ▒▒▒                  
+ ▒███▒███ ▒███  ████  █████ █████           ▒███    ▒███  ████  █████████████  
+ ▒███▒▒███▒███ ▒▒███ ▒▒███ ▒▒███            ▒███    ▒███ ▒▒███ ▒▒███▒▒███▒▒███ 
+ ▒███ ▒▒██████  ▒███  ▒▒▒█████▒             ▒▒███   ███   ▒███  ▒███ ▒███ ▒███ 
+ ▒███  ▒▒█████  ▒███   ███▒▒▒███             ▒▒▒█████▒    ▒███  ▒███ ▒███ ▒███ 
+ █████  ▒▒█████ █████ █████ █████ █████████    ▒▒███      █████ █████▒███ █████
+▒▒▒▒▒    ▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒      ▒▒▒      ▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒ ▒▒▒▒▒ 
+                                                                               
 "
             ];
             keys = [
               {
                 icon = " ";
                 key = "f";
-                desc = "Find File";
+                desc = "Find";
                 action = ":lua Snacks.dashboard.pick('files')";
               }
               {
                 icon = " ";
                 key = "n";
-                desc = "New File";
+                desc = "New";
                 action = ":ene | startinsert";
               }
               {
                 icon = " ";
                 key = "g";
-                desc = "Find Text";
+                desc = "Text grep";
                 action = ":lua Snacks.dashboard.pick('live_grep')";
               }
               {
                 icon = " ";
                 key = "r";
-                desc = "Recent Files";
+                desc = "Recents";
                 action = ":lua Snacks.dashboard.pick('oldfiles')";
               }
               {
@@ -95,45 +89,18 @@
               gap = 1;
               padding = 1;
             }
-            {
-              section = "recent_files";
-              icon = " ";
-              title = "Recent Files";
-              padding = 1;
-            }
-            {
-              section = "projects";
-              icon = " ";
-              title = "Projects";
-              padding = 1;
-            }
           ];
         };
-
-        # =====================================================================
-        # STYLES GLOBAUX SIMPLIFIÉS - Une seule ligne !
-        # =====================================================================
         styles._global.border = "rounded";
 
-        # =====================================================================
-        # CONFIGURATIONS SPÉCIFIQUES MINIMALES
-        # =====================================================================
-
-        # Picker - juste le fix essentiel
         picker.sources.explorer = {
-          follow_file = false; # Désactive le file watching problématique
-          watch = false; # Désactiver tous les watchers
+          follow_file = false;
+          watch = false;
         };
 
-        # Scratch - format par défaut
         scratch.ft = "markdown";
       };
-
-      # =====================================================================
-      # TOGGLES COMPLETS - GARDÉS (excellente fonctionnalité)
-      # =====================================================================
       luaConfig.post = ''
-        -- UI toggles
         Snacks.toggle.option("number", { name = "Line Numbers" }):map("<leader>ul")
         Snacks.toggle.option("relativenumber", { name = "Relative Numbers" }):map("<leader>ur") 
         Snacks.toggle.option("wrap", { name = "Word Wrap" }):map("<leader>uw")
@@ -142,7 +109,6 @@
         Snacks.toggle.option("signcolumn", { off = "no", on = "yes", name = "Sign Column" }):map("<leader>uG")
         Snacks.toggle.option("list", { name = "List Chars" }):map("<leader>uL")
 
-        -- Feature toggles
         Snacks.toggle.indent():map("<leader>ug")
         Snacks.toggle.zen():map("<leader>uz")
         Snacks.toggle.dim():map("<leader>uD")
@@ -154,7 +120,6 @@
         Snacks.toggle.inlay_hints():map("<leader>uh")
       '';
     };
-
     telescope.enable = true;
   };
 
@@ -168,7 +133,6 @@
   ];
 
   keymaps = [
-    # ===== BUFFER GROUP - <leader>b =====
     {
       mode = "n";
       key = "<leader>bd";
@@ -199,16 +163,12 @@
       '';
       options.desc = "Select Scratch Buffer";
     }
-
-    # ===== EXPLORATEUR =====
     {
       mode = "n";
       key = "<leader>e";
       action = "<cmd>lua Snacks.explorer()<cr>";
       options.desc = "Explorer";
     }
-
-    # ===== FIND/FILE GROUP - <leader>f =====
     {
       mode = "n";
       key = "<leader>ff";
@@ -255,23 +215,12 @@
       action = "<cmd>lua Snacks.picker.command_history()<cr>";
       options.desc = "Command History";
     }
-
-    # ===== NOTIFICATIONS GROUP - <leader>n =====
     {
       mode = "n";
       key = "<leader>nh";
       action = "<cmd>lua Snacks.notifier.show_history()<cr>";
       options.desc = "Show History";
     }
-    {
-      mode = "n";
-      key = "<leader>nd";
-      action = "<cmd>lua Snacks.notifier.hide()<cr>";
-      options.desc = "Dismiss All";
-    }
-
-    # ===== SEARCH GROUP - <leader>s =====
-    # Buffer and Grep
     {
       mode = "n";
       key = "<leader>sb";
@@ -352,44 +301,6 @@
       action.__raw = ''function() require("snacks").picker.keymaps() end'';
       options.desc = "Keymaps";
     }
-    {
-      mode = "n";
-      key = "<leader>sl";
-      action.__raw = ''function() require("snacks").picker.loclist() end'';
-      options.desc = "Location List";
-    }
-    {
-      mode = "n";
-      key = "<leader>sM";
-      action.__raw = ''function() require("snacks").picker.man() end'';
-      options.desc = "Man Pages";
-    }
-    {
-      mode = "n";
-      key = "<leader>sm";
-      action.__raw = ''function() require("snacks").picker.marks() end'';
-      options.desc = "Marks";
-    }
-    {
-      mode = "n";
-      key = "<leader>fp";
-      action.__raw = ''function() require("snacks").picker.projects() end'';
-      options.desc = "Find Project";
-    }
-    {
-      mode = "n";
-      key = "<leader>sR";
-      action.__raw = ''function() require("snacks").picker.resume() end'';
-      options.desc = "Resume";
-    }
-    {
-      mode = "n";
-      key = "<leader>su";
-      action.__raw = ''function() require("snacks").picker.undo() end'';
-      options.desc = "Undotree";
-    }
-
-    # ===== TERMINAL GROUP - <leader>t =====
     {
       mode = "n";
       key = "<leader>tt";
