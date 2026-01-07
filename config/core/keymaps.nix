@@ -11,7 +11,7 @@
       action = "b";
       options.desc = "Début du mot";
     }
-    {   
+    {
       mode = [
         "n"
         "v"

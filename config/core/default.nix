@@ -1,9 +1,9 @@
 {
-  imports = [ 
-	./colorscheme.nix 
-	./keymaps.nix 
-	./options.nix 
-	];
+  imports = [
+    ./colorscheme.nix
+    ./keymaps.nix
+    ./options.nix
+  ];
 
   performance = {
     byteCompileLua = {

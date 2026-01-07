@@ -1,9 +1,5 @@
 { pkgs, ... }:
 {
-  # =====================================================================
-  # CONFIGURATION DES LANGAGES - Version avec grammarPackages
-  # =====================================================================
-
   imports = [
     ./bash.nix
     ./c.nix
@@ -14,19 +10,11 @@
   ];
 
   plugins = {
-    # =====================================================================
-    # LSP DE BASE
-    # =====================================================================
     lsp.enable = true;
-
-    # =====================================================================
-    # TREESITTER - Configuration complète RESTAURÉE
-    # =====================================================================
     treesitter = {
       enable = true;
 
       grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-        # Langages de base
         lua
         luadoc
         luap
@@ -36,18 +24,15 @@
         regex
         printf
 
-        # Shell
         bash
         fish
 
-        # Git
         diff
         git_config
         git_rebase
         gitcommit
         gitignore
 
-        # Configuration et données
         json
         jsonc
         yaml
@@ -75,7 +60,6 @@
           };
         };
 
-        # Plugin additionnel pour le contexte
         treesitter-context = {
           enable = true;
           settings = {
@@ -87,7 +71,6 @@
           };
         };
 
-        # Text objects utiles
         textobjects = {
           select = {
             enable = true;
@@ -108,7 +91,7 @@
       settings = {
         format_on_save = {
           timeout_ms = 1000;
-          lsp_fallback = true; # Fallback vers LSP si conform n'a pas de formatter
+          lsp_fallback = true;
         };
       };
     };
@@ -127,7 +110,6 @@
   };
 
   extraConfigLua = ''
-    -- Configuration des icônes de diagnostic dans la marge
     vim.diagnostic.config({
       signs = {
         text = {
@@ -148,7 +130,6 @@
             message = message:sub(1, 57) .. "..."
           end
           
-          -- Ajouter la source si elle existe
           local source = diagnostic.source
           if source and source ~= "" then
             return string.format("[%s] %s", source, message)
@@ -178,11 +159,10 @@
       severity_sort = true,
       
       jump = {
-        float = true,  -- Ouvrir float automatiquement lors de la navigation
+        float = true, 
       },
     })
     
-    -- Configuration des highlights (couleurs gruvbox)
     vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#fb4934" })  -- Rouge
     vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#fabd2f" })   -- Jaune
     vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = "#83a598" })   -- Bleu
